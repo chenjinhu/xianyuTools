@@ -7,3 +7,9 @@
 - 学习
 - 长期维护更新
 - 交流/提建议/定制化需求 加微信:cjh-18888
+
+
+
+---
+参考项目
+https://github.com/zhyaoqi/platformautoplug

@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         funcList.add("启动应用");
         funcList.add("检测登录状态");
         LinearLayout layoutFuncCheckbox = findViewById(R.id.layout_func_checkbox);
-
         for (final String func:funcList){
             CheckBox checkBox = new CheckBox(this);
             checkBox.setText(func);

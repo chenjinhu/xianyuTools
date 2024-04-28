@@ -36,9 +36,10 @@ public class PlugService extends AccessibilityService {
     private void xianyu(AccessibilityNodeInfo rootNodeInfo){
         // 判断当前应用是否为闲鱼
         String currentPkgName = (String) rootNodeInfo.getPackageName();
-        if (!currentPkgName.equals(Constant.PackageNameXianyu)) {
+        if (!currentPkgName.equals(Constant.PackageNameXianyu) && Constant.OpenXianyu) {
             Log.d(TAG, "xianyu: 闲鱼应用没有启动, 开始启动闲鱼");
 //            Toast.makeText(this, "闲鱼应用没有启动, 开始启动闲鱼", Toast.LENGTH_SHORT).show();
+            Constant.OpenXianyu = false;
             startXianyu();
             return;
         }
@@ -55,7 +56,19 @@ public class PlugService extends AccessibilityService {
             sleep(3000,0);
             AccessibilityNodeInfo childNode = primaryRightNode.get(0);
             childNode.performAction(AccessibilityNodeInfo.ACTION_CLICK);
-            
+            sleep(3000,0);
+            return;
+        }
+        // 检测登录状态
+        List<AccessibilityNodeInfo> loginBannerNode = rootNodeInfo.findAccessibilityNodeInfosByViewId("com.taobao.idlefish:id/login_guide_bar");
+        if (checkNotEmpty(loginBannerNode)) {
+            // 同意隐私政策.
+            Toast.makeText(this, "同意隐私政策", Toast.LENGTH_SHORT).show();
+            sleep(3000,0);
+            AccessibilityNodeInfo childNode = loginBannerNode.get(0);
+            childNode.performAction(AccessibilityNodeInfo.ACTION_CLICK);
+            sleep(3000,0);
+            return;
         }
     }
     private void sleep(int sleepTime,int sleepRandomTime){
