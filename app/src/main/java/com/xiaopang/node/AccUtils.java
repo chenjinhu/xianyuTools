@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
+import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 import android.content.pm.PackageManager;
 
@@ -29,6 +30,8 @@ public class AccUtils extends AccessibilityService {
 
     }
 
+
+    // ===============  工具类   ===============
     public static Boolean startApplication(Context ctx, String pkName) {
         PackageManager packageManager = ctx.getPackageManager();
         Intent resolveIntent = new Intent(Intent.ACTION_MAIN, null);
@@ -60,7 +63,43 @@ public class AccUtils extends AccessibilityService {
         return false;
     }
 
-    // 日志打印
+    /**
+     * 获取当前Activity
+     */
+    public static String currentActivityName() {
+        return currentActivityName;
+    }
+    /**
+     * 刷新当前activity
+     * @param event
+     */
+    protected void refreshCurrentActivity(AccessibilityEvent event) {
+        if (event.getEventType() == AccessibilityEvent.TYPE_WINDOWS_CHANGED) {
+            String packageName = String.valueOf(event.getPackageName());
+            String className = String.valueOf(event.getClassName());
+// 获取到了当前活动的包名和类名，可以进行相应处理
+             printLogMsg(packageName, 0);
+            if (
+                    className.startsWith("android.widget.") ||
+                            className.startsWith("android.view.") ||
+                            currentActivityName.equals(className)
+            ) {
+                return;
+            }
+            currentActivityName = className;
+            Log.i(TAG, "refreshCurrentActivity: " + className);
+        }
+    }
+
+    protected void systemClickListener(AccessibilityEvent event) {
+        // 监听系统事件
+        if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_CLICKED) {
+            // 当发生点击事件时执行相应的操作
+            // 可以在这里处理系统点击事件的逻辑
+            // printLogMsg("当发生点击事件时执行相应的操作", 0);
+        }
+    }
+        // 日志打印
     public static void printLogMsg(String msg) {
         Intent intent = new Intent();
         intent.setAction("com.msg");

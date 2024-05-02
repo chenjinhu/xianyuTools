@@ -1,28 +1,33 @@
 package com.xiaopang.xianyu;
 
-import android.Manifest;
+import static com.xiaopang.Constant.tag;
+import static com.xiaopang.node.AccUtils.startApplication;
+
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.view.View;
+
+import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.xiaopang.Constant;
+import static com.xiaopang.node.AccUtils.*;
+
+import com.xiaopang.service.MyService;
 import com.xiaopang.tools.Enviroment;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
+    public static String TAG = tag;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +41,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Constant.context = getApplicationContext();
-
+        Constant.mainActivity = this;
+        // 开启前台服务 未适配低版本安卓
+         openForwardService();
+         
+         
         TextView textXianyuInstalled = findViewById(R.id.text_xianyuInstalled);
         textXianyuInstalled.setText("闲鱼安装状态:" + Enviroment.checkAppInstalled(getApplicationContext(), Constant.PackageNameXianyu));
 
@@ -56,9 +65,22 @@ public class MainActivity extends AppCompatActivity {
             layoutFuncCheckbox.addView(checkBox);
             checkBox.setChecked(true);
 
+            work();
 
         }
 
+        // TaskFlow
 
+
+    }
+    private void openForwardService() {
+        Intent intent = new Intent(this, MyService.class);
+        startService(intent);
+    }
+
+    protected void work(){
+        startApplication(getApplicationContext(),Constant.PackageNameXianyu);
+        String acctivityName = currentActivityName();
+        Log.d(TAG, "acctivityName: " + acctivityName);
     }
 }

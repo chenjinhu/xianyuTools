@@ -2,11 +2,17 @@ package com.xiaopang;
 
 import android.content.Context;
 
+import com.xiaopang.xianyu.MainActivity;
+
 
 public class Constant {
     public static String tag = "xiaopang";
     // 上下文
     public static Context context = null;
+    public static MainActivity mainActivity = null;
+
+    // 当前ActivityName
+    public static volatile String currentActivityName = "";
 
     // 中控服务端接口, 预留
     public static String API = "http://192.168.1.37:5000";

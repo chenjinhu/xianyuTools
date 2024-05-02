@@ -1,6 +1,6 @@
 package com.xiaopang.service;
 
-import static com.xiaopang.Constant.isClickMe;
+import static com.xiaopang.Constant.*;
 
 import android.accessibilityservice.AccessibilityService;
 import android.content.ComponentName;
@@ -10,39 +10,48 @@ import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.Toast;
 
-import com.xiaopang.Constant;
+import com.xiaopang.node.AccUtils;
 
 import java.util.List;
 import java.util.Random;
 
-public class PlugService extends AccessibilityService {
-    private static final String TAG = "闲鱼自动化";
+public class PlugService extends AccUtils {
+    public static String TAG = tag;
+
     @Override
     public void onAccessibilityEvent(AccessibilityEvent accessibilityEvent) {
-        AccessibilityNodeInfo rootNodeInfo = getRootInActiveWindow();
-        Log.d(TAG, "onAccessibilityEvent: " + rootNodeInfo.getClassName());
-        if (rootNodeInfo == null) {
-            return;
-        }
+        Log.d(TAG, "onAccessibilityEvent: ");
+//        AccessibilityNodeInfo rootNodeInfo = getRootInActiveWindow();
+//        Log.d(TAG, "onAccessibilityEvent: " + rootNodeInfo.getClassName());
+//        if (rootNodeInfo == null) {
+//            return;
+//        }
 
-        xianyu(rootNodeInfo);
+//        xianyu(rootNodeInfo);
+        // 刷新当前 Activity()
+        super.refreshCurrentActivity(accessibilityEvent);
+
+        // 监听点击事件
+        super.systemClickListener(accessibilityEvent);
 
     }
 
     @Override
     protected void onServiceConnected() {
         super.onServiceConnected();
-        Log.d(TAG, "onServiceConnected: ");
+        Log.d(tag, "onServiceConnected: ");
         Toast.makeText(this, "闲鱼助手启动成功", Toast.LENGTH_LONG).show();
+        String acctivityName = currentActivityName();
+        Log.d(TAG, "acctivityName: " + acctivityName);
     }
 
     private void xianyu(AccessibilityNodeInfo rootNodeInfo){
         // 判断当前应用是否为闲鱼
         String currentPkgName = (String) rootNodeInfo.getPackageName();
-        if (!currentPkgName.equals(Constant.PackageNameXianyu) && Constant.OpenXianyu) {
-            Log.d(TAG, "xianyu: 闲鱼应用没有启动, 开始启动闲鱼");
+        if (!currentPkgName.equals(PackageNameXianyu) && OpenXianyu) {
+            Log.d(tag, "xianyu: 闲鱼应用没有启动, 开始启动闲鱼");
 //            Toast.makeText(this, "闲鱼应用没有启动, 开始启动闲鱼", Toast.LENGTH_SHORT).show();
-            Constant.OpenXianyu = false;
+            OpenXianyu = false;
             startXianyu();
             return;
         }
@@ -115,7 +124,7 @@ public class PlugService extends AccessibilityService {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_LAUNCHER);
         intent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setComponent(new ComponentName(Constant.PackageNameXianyu, "com.taobao.fleamarket.home.activity.InitActivity"));
+        intent.setComponent(new ComponentName(PackageNameXianyu, "com.taobao.fleamarket.home.activity.InitActivity"));
         startActivity(intent);
 
     }
