@@ -30,7 +30,7 @@ public class PlugService extends AccessibilityService {
     protected void onServiceConnected() {
         super.onServiceConnected();
         Log.d(TAG, "onServiceConnected: ");
-        Toast.makeText(this, "闲鱼助手启动成功😄", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "闲鱼助手启动成功", Toast.LENGTH_LONG).show();
     }
 
     private void xianyu(AccessibilityNodeInfo rootNodeInfo){
