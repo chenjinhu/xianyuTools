@@ -6,7 +6,6 @@
     android:accessibilityFeedbackType="feedbackAllMask"
 
     android:notificationTimeout="10"
-    android:settingsActivity="com.zhyaoqi.platformautoplug.activity.SettingActivity"
     android:accessibilityFlags="flagReportViewIds"
     android:canRetrieveWindowContent="true">
 

@@ -1,5 +1,7 @@
 package com.xiaopang.service;
 
+import static com.xiaopang.Constant.isClickMe;
+
 import android.accessibilityservice.AccessibilityService;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -18,6 +20,7 @@ public class PlugService extends AccessibilityService {
     @Override
     public void onAccessibilityEvent(AccessibilityEvent accessibilityEvent) {
         AccessibilityNodeInfo rootNodeInfo = getRootInActiveWindow();
+        Log.d(TAG, "onAccessibilityEvent: " + rootNodeInfo.getClassName());
         if (rootNodeInfo == null) {
             return;
         }
@@ -59,17 +62,29 @@ public class PlugService extends AccessibilityService {
             sleep(3000,0);
             return;
         }
-        // 检测登录状态
+        // 检测登录按钮状态
         List<AccessibilityNodeInfo> loginBannerNode = rootNodeInfo.findAccessibilityNodeInfosByViewId("com.taobao.idlefish:id/login_guide_bar");
         if (checkNotEmpty(loginBannerNode)) {
             // 同意隐私政策.
             Toast.makeText(this, "同意隐私政策", Toast.LENGTH_SHORT).show();
-            sleep(3000,0);
             AccessibilityNodeInfo childNode = loginBannerNode.get(0);
             childNode.performAction(AccessibilityNodeInfo.ACTION_CLICK);
-            sleep(3000,0);
             return;
         }
+        // 没有其他选择点击按钮 “我的” ， 提取登录信息
+        if (isClickMe == false) {
+            List<AccessibilityNodeInfo> buttonMy = rootNodeInfo.findAccessibilityNodeInfosByText("我的");
+            if (checkNotEmpty(buttonMy)) {
+                // 点击 我的 按钮
+                Toast.makeText(this, "点击 我的 按钮", Toast.LENGTH_SHORT).show();
+                AccessibilityNodeInfo childNode = buttonMy.get(0);
+                childNode.performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                isClickMe = true;
+            }
+        }
+
+//        Toast.makeText(this, "啥也没有", Toast.LENGTH_SHORT).show();
+
     }
     private void sleep(int sleepTime,int sleepRandomTime){
         try {

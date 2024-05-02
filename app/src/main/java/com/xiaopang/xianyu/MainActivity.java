@@ -3,6 +3,7 @@ package com.xiaopang.xianyu;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        Constant.context = getApplicationContext();
+
         TextView textXianyuInstalled = findViewById(R.id.text_xianyuInstalled);
         textXianyuInstalled.setText("闲鱼安装状态:" + Enviroment.checkAppInstalled(getApplicationContext(), Constant.PackageNameXianyu));
 
@@ -41,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         boolean accessibilityEnabled = Enviroment.checkAccessibilityEnabled(getApplicationContext());
 
         textAsPermission.setText("无障碍权限:" + accessibilityEnabled);
-//        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.BIND_ACCESSIBILITY_SERVICE},);
 
         ArrayList<String> funcList = new ArrayList<>();
         funcList.add("启动应用");
