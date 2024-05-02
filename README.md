@@ -1,7 +1,7 @@
-# 闲鱼助手 - 免费版
+# 闲鱼助手
 
 > 目前啥功能也没用, 各位看观加个star, 一个月后再来看.
-
+> 通过闲鱼这个应用的日常养号做一个简单的自动化操作框架
 
 - 免费
 - 学习
@@ -13,3 +13,4 @@
 ---
 参考项目
 https://github.com/zhyaoqi/platformautoplug
+https://github.com/1754048656/FATJS

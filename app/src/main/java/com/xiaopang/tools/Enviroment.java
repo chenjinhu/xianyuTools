@@ -1,9 +1,12 @@
 package com.xiaopang.tools;
 
+import static com.xiaopang.Constant.tag;
+
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.util.Log;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.core.content.ContextCompat;
@@ -11,6 +14,7 @@ import androidx.core.content.ContextCompat;
 import java.util.List;
 
 public class Enviroment {
+    public static String TAG = tag;
     public static boolean checkAppInstalled(Context context, String pkgName){
 
         if (pkgName.isEmpty()) {
@@ -21,6 +25,8 @@ public class Enviroment {
         if (pkgInfos != null) {
             for (int i = 0; i < pkgInfos.size(); i++) {
                 String pkg = pkgInfos.get(i).packageName;
+                Log.d(TAG, "checkAppInstalled: " + pkg );
+
                 if (pkg.equals(pkgName)) {
                     return true;
                 }

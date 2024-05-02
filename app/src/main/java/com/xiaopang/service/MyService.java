@@ -78,6 +78,6 @@ public class MyService extends Service {
 
             return START_STICKY;
         }catch (Exception ignored) {}
-        return 1;
+        return Service.START_STICKY;
     }
 }
