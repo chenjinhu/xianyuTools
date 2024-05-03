@@ -6,4 +6,7 @@ public class TaskBase implements ITaskBase{
     public void _openPkName(String packageName) {
         AccUtils.startApplication(context, packageName);
     }
+
+    public void initJavet(String script_path) {}
+
 }

@@ -5,10 +5,13 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
+import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 import android.content.pm.PackageManager;
 
+import com.xiaopang.Constant;
 import com.xiaopang.xianyu.utils.ExceptionUtil;
 
 import java.util.List;
@@ -99,7 +102,55 @@ public class AccUtils extends AccessibilityService {
             // printLogMsg("当发生点击事件时执行相应的操作", 0);
         }
     }
-        // 日志打印
+    // 判断本程序的无障碍服务是否已经开启
+    public static Boolean isAccessibilityServiceOn() {
+        try{
+            String packageName = context.getPackageName();
+            String service = packageName + "/" + packageName + ".MyAccessibilityService";
+            int enabled = Settings.Secure.getInt(Constant.context.getContentResolver(), Settings.Secure.ACCESSIBILITY_ENABLED);
+            TextUtils.SimpleStringSplitter splitter = new TextUtils.SimpleStringSplitter(':');
+            if (enabled == 1) {
+                String settingValue = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
+                if (settingValue != null) {
+                    splitter.setString(settingValue);
+                    while (splitter.hasNext()) {
+                        String accessibilityService = splitter.next();
+                        if (accessibilityService.equals(service)) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return false;
+        }
+        return false;
+    }
+    // 移动悬浮窗
+    public static void moveFloatWindow(String val) {
+        try {
+            AccUtils.printLogMsg("移动悬浮窗 => " + val, 0);
+            Intent intent = new Intent();
+            intent.setAction("com.msg");
+            switch (val) {
+                case "打开":
+                    intent.putExtra("msg", "show_max");
+                    break;
+                case "隐藏":
+                    intent.putExtra("msg", "hide_mini");
+                    break;
+                case "全屏":
+                    intent.putExtra("msg", "full_screen");
+                    break;
+            }
+            context.sendBroadcast(intent);
+        }catch (Exception e){
+            printLogMsg(ExceptionUtil.toString(e), 0);
+        }
+    }
+
+    // 日志打印
     public static void printLogMsg(String msg) {
         Intent intent = new Intent();
         intent.setAction("com.msg");

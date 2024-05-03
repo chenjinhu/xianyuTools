@@ -35,7 +35,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Xianyu"
         tools:targetApi="31">
-
+        <meta-data
+            android:name="ScopedStorage"
+            android:value="true" />
 <!--        <provider-->
 <!--            android:name="androidx.core.content.FileProvider"-->
 <!--            android:authorities="${applicationId}.provider"-->
@@ -59,18 +61,56 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-        <service
-            android:name=".service.PlugService"
-            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
+        <activity android:name=".activitys.EditorActivity"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.accessibilityservice.AccessibilityService"/>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/*" />
+                <data android:mimeType="application/json" />
+                <data android:mimeType="application/*xml*" />
+                <data android:mimeType="application/*latex*" />
+                <data android:mimeType="application/javascript" />
             </intent-filter>
-            <meta-data android:name="android.accessibilityservice"
-                android:resource="@xml/accessible_service_config"/>
-        </service>
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/*" />
+                <data android:mimeType="application/json" />
+                <data android:mimeType="application/*xml*" />
+                <data android:mimeType="application/*latex*" />
+                <data android:mimeType="application/javascript" />
+            </intent-filter>
+        </activity>
+
+<!--        <service-->
+<!--            android:name=".service.PlugService"-->
+<!--            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.accessibilityservice.AccessibilityService"/>-->
+<!--            </intent-filter>-->
+<!--            <meta-data android:name="android.accessibilityservice"-->
+<!--                android:resource="@xml/accessible_service_config"/>-->
+<!--        </service>-->
+
+        <service android:name=".activitys.FloatingButton"/>
+        <service android:name=".activitys.FloatingWindow"/>
+
+        <service
+            android:name=".MyAccessibilityService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility" />
+            </service>
     </application>
 
 </manifest>
