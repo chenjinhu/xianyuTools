@@ -1,8 +1,7 @@
-package com.xiaopang.service;
+package com.xiaopang.xianyu.service;
 
 import static com.xiaopang.Constant.*;
 
-import android.accessibilityservice.AccessibilityService;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.util.Log;
@@ -10,7 +9,7 @@ import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.Toast;
 
-import com.xiaopang.node.AccUtils;
+import com.xiaopang.xianyu.node.AccUtils;
 
 import java.util.List;
 import java.util.Random;

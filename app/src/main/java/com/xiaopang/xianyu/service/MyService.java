@@ -1,9 +1,8 @@
-package com.xiaopang.service;
+package com.xiaopang.xianyu.service;
 
 import static com.xiaopang.Constant.tag;
-import static com.xiaopang.node.AccUtils.printLogMsg;
+import static com.xiaopang.xianyu.node.AccUtils.printLogMsg;
 
-import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -17,6 +16,7 @@ import android.os.IBinder;
 import androidx.annotation.Nullable;
 
 import com.xiaopang.xianyu.R;
+import com.xiaopang.xianyu.node.AccUtils;
 
 public class MyService extends Service {
     private static final String TAG = tag;
@@ -34,7 +34,7 @@ public class MyService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         try {
             // 提高进程优先级
-            printLogMsg("提高进程优先级", 0);
+            AccUtils.printLogMsg("提高进程优先级", 0);
             // intent.putExtra("main", "hello ");
 
             //---------------------------------------------

@@ -1,4 +1,4 @@
-package com.xiaopang.utils;
+package com.xiaopang.xianyu.utils;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

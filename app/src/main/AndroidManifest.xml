@@ -47,11 +47,11 @@
 <!--        </provider>-->
         <!-- 前台服务 -->
         <service
-            android:name="com.xiaopang.service.MyService"
+            android:name=".service.MyService"
             android:enabled="true"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activitys.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -62,7 +62,7 @@
 
 
         <service
-            android:name="com.xiaopang.service.PlugService"
+            android:name=".service.PlugService"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
             android:exported="true">
             <intent-filter>
