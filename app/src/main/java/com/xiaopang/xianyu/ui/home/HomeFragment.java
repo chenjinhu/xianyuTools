@@ -111,7 +111,7 @@ public class HomeFragment extends Fragment {
 
     public void btnClick() {
         printLogMsg("btnClick", 0);
-//        startActivity(new Intent(getActivity(), EditorActivity.class));
+        startActivity(new Intent(getActivity(), EditorActivity.class));
     }
 
     @Override
