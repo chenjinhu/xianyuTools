@@ -28,6 +28,14 @@ public class Constant {
 
 
     public static String tag = "xiaopang";
+    // 停顿时长
+    public static final int waitHrefOfSecond  =   500;
+    public static final int waitOneSecond     =   1000;
+    public static final int waitTwoSecond     =   2000;
+    public static final int waitThreeSecond   =   3000;
+    public static final int waitFourSecond    =   4000;
+    public static final int waitFiveSecond    =   5000;
+    public static final int waitSixSecond     =   6000;
     // 上下文
     public static Context context = null;
     public static MainActivity mainActivity = null;
