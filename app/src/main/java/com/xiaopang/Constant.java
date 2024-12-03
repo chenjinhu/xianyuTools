@@ -3,7 +3,10 @@ package com.xiaopang;
 import static com.xiaopang.xianyu.node.AccUtils.printLogMsg;
 
 import android.content.Context;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.caoccao.javet.interop.V8Runtime;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.xiaopang.xianyu.activitys.MainActivity;
@@ -12,7 +15,13 @@ import com.xiaopang.xianyu.utils.StringUtils;
 
 
 public class Constant {
+    public static boolean CRON_TASK = false; // 定时任务是否开启
+    public static String CRON_TASK_FILE = "定时任务配置.txt"; // 定时任务配置
+    public static String CRON_TASK_FILE_TEST = "test_demo.js"; // 定时任务测试
+
     public static boolean DEV_MODE = false; // 开发者模式
+    public static V8Runtime v8Runtime;
+
     public static String XIAOPANG_INFO = "小胖";
     public static String XIAOPANG_INFO_HOME = "小胖 XIAOPANG_INFO_HOME";
     public static final String PATH = "/XIAOPANG_DIR/";
@@ -53,7 +62,10 @@ public class Constant {
     public static boolean isRunning = false; // 是否有任务在运行
     public static boolean isOpenFloatWin = false; // 悬浮窗是否打开
     public static String checkedFileName = ""; // 当前选中的脚本文件名称
-
+    // 悬浮窗展示的文字
+    public static TextView btnTextView = null;
+    // ll
+    public static LinearLayout ll = null;
 
     public static void saveConfig() {
 

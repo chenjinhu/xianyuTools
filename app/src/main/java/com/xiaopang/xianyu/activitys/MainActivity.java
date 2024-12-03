@@ -45,6 +45,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     public static String TAG = tag;
     private ActivityMainBinding binding;
+//    public static CronTaskManager cronTaskManager;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -62,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
         context = getApplicationContext();
         mainActivity = this;
         // 开启前台服务 未适配低版本安卓
-//        openFloatWindow();
-        openForwardService();
+        openFloatWindow();
+//        openForwardService();
 
 
         com.xiaopang.xianyu.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -96,8 +97,6 @@ public class MainActivity extends AppCompatActivity {
             printLogMsg("onCreate: permission true => " + permission, 0);
             // 打开悬浮窗
             startService(new Intent(context, FloatingWindow.class));
-            // 打开悬浮窗
-            startService(new Intent(context, FloatingButton.class));
         }
     }
 

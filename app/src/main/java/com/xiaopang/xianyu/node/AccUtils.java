@@ -14,6 +14,8 @@ import android.content.pm.PackageManager;
 import com.xiaopang.Constant;
 import com.xiaopang.xianyu.utils.ExceptionUtil;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 public class AccUtils extends AccessibilityService {
@@ -152,6 +154,7 @@ public class AccUtils extends AccessibilityService {
 
     // 日志打印
     public static void printLogMsg(String msg) {
+        Log.d(TAG, "printLogMsg: " + msg);
         Intent intent = new Intent();
         intent.setAction("com.msg");
         intent.putExtra("msg", msg);
@@ -178,5 +181,15 @@ public class AccUtils extends AccessibilityService {
         intent.setAction("com.msg");
         intent.putExtra("msg", msg);
         context.sendBroadcast(intent);
+    }
+
+
+    // 从 assets 中加载 JavaScript 文件
+    public static String loadScriptFromAssets(String fileName) throws IOException {
+        InputStream inputStream = context.getAssets().open(fileName);
+        byte[] buffer = new byte[inputStream.available()];
+        inputStream.read(buffer);
+        inputStream.close();
+        return new String(buffer);
     }
 }

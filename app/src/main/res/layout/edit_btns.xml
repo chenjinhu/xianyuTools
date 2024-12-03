@@ -9,15 +9,15 @@
     android:padding="5dp"
     android:weightSum="8">
 
-<!--    <ImageView-->
-<!--        android:id="@+id/edShare"-->
-<!--        android:layout_width="@dimen/ed_btn_width"-->
-<!--        android:layout_height="@dimen/ed_btn_height"-->
-<!--        android:layout_margin="@dimen/ed_btn_margin"-->
-<!--        android:layout_weight="1"-->
-<!--        android:clickable="true"-->
-<!--        android:onClick="edButtons"-->
-<!--        android:src="@drawable/ic_share_black_24dp" />-->
+    <!--    <ImageView-->
+    <!--        android:id="@+id/edShare"-->
+    <!--        android:layout_width="@dimen/ed_btn_width"-->
+    <!--        android:layout_height="@dimen/ed_btn_height"-->
+    <!--        android:layout_margin="@dimen/ed_btn_margin"-->
+    <!--        android:layout_weight="1"-->
+    <!--        android:clickable="true"-->
+    <!--        android:onClick="edButtons"-->
+    <!--        android:src="@drawable/ic_share_black_24dp" />-->
 
 
     <ImageView
