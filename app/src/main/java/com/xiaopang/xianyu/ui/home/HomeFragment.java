@@ -61,24 +61,24 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-//        recyclerView = root.findViewById(R.id.recycler);
-//        recyclerView.setHasFixedSize(true);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-//        recyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
-//        myRecyclerAdapter = new MyRecyclerAdapter(list);
-//        recyclerView.setAdapter(myRecyclerAdapter);
+        recyclerView = root.findViewById(R.id.recycler);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        myRecyclerAdapter = new MyRecyclerAdapter(list);
+        recyclerView.setAdapter(myRecyclerAdapter);
 
         printLogMsg("HomeFragment onCreateView", 0);
-//        getFileList(1);
-//        // 恢复选中状态
-//        int checkedPosition = myRecyclerAdapter.getCheckedPosition();
-//        if (checkedPosition != -1) {
-//            myRecyclerAdapter.notifyItemChanged(checkedPosition);
-//        }
-//
-//        final TextView textView = binding.textHome;
-//        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        getFileList(1);
+        // 恢复选中状态
+        int checkedPosition = myRecyclerAdapter.getCheckedPosition();
+        if (checkedPosition != -1) {
+            myRecyclerAdapter.notifyItemChanged(checkedPosition);
+        }
+
+        final TextView textView = binding.textHome;
+        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
@@ -147,11 +147,11 @@ public class HomeFragment extends Fragment {
 
             public MyViewHolder(View view) {
                 super(view);
-//                radio_button = view.findViewById(R.id.radio_button);
-//                file_name = view.findViewById(R.id.file_name);
-//                run_script = view.findViewById(R.id.run_script);
-//                delete_script = view.findViewById(R.id.delete_script);
-//                rename_script = view.findViewById(R.id.rename_script);
+                radio_button = view.findViewById(R.id.radio_button);
+                file_name = view.findViewById(R.id.file_name);
+                run_script = view.findViewById(R.id.run_script);
+                delete_script = view.findViewById(R.id.delete_script);
+                rename_script = view.findViewById(R.id.rename_script);
             }
         }
 
@@ -161,10 +161,9 @@ public class HomeFragment extends Fragment {
 
         @Override
         public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//            View itemView = LayoutInflater.from(parent.getContext())
-//                    .inflate(R.layout.recycler_item, parent, false);
-//            return new MyViewHolder(itemView);
-            return null;
+            View itemView = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.recycler_item, parent, false);
+            return new MyViewHolder(itemView);
         }
 
         @Override

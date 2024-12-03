@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.xiaopang.xianyu.ui.dashboard.DashboardFragment"
+        android:name="com.xiaopang.xianyu.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 

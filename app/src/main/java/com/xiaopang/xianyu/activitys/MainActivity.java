@@ -9,7 +9,9 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -48,20 +50,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
         ActionBar actionBar = getSupportActionBar();
         Window window = getWindow();
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.status_color));
+        // 状态栏文字颜色
         if (actionBar != null) {
             actionBar.setBackgroundDrawable(new ColorDrawable(Color.argb(165,0,0,0)));
         }
 
+
         context = getApplicationContext();
         mainActivity = this;
         // 开启前台服务 未适配低版本安卓
-        openFloatWindow();
+//        openFloatWindow();
         openForwardService();
+
+
+        com.xiaopang.xianyu.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         // 底部导航栏
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -97,12 +103,61 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void initDisplay() {
-        
+        DisplayMetrics dm = new DisplayMetrics();//屏幕度量
+        Display defaultDisplay = getWindowManager().getDefaultDisplay(); //获取屏幕宽高
+        defaultDisplay.getRealMetrics(dm); //获取真实的宽高
+        mWidth = dm.widthPixels;//宽度
+        mHeight = dm.heightPixels;//高度
+        DisplayMetrics __dm = new DisplayMetrics();//屏幕度量
+        getWindowManager().getDefaultDisplay().getMetrics(__dm);
+        __mHeight = __dm.heightPixels;//去掉导航栏和状态栏的高度
+        statusBarHeight = getStatusBarHeight(); //状态栏的高度
+        navigationBarHeight = getNavigationBarHeight(); //导航栏的高度
+        if (__mHeight + navigationBarHeight == mHeight) { // 屏幕内是否有导航栏的高度
+            navigationBarOpen = true;
+            return;
+        }
+        if (__mHeight + statusBarHeight + navigationBarHeight == mHeight) {
+            navigationBarOpen = true;
+            return;
+        }
+        if (__mHeight + statusBarHeight == mHeight) {
+            navigationBarOpen = false;
+            return;
+        }
+        if (__mHeight + navigationBarHeight > mHeight) {
+            navigationBarOpen = false;
+            return;
+        }
+        navigationBarOpen = false;
+
+
     }
 
-    private void testFunc(){
+    /**
+     * @return 导航栏的高度
+     */
+    public int getNavigationBarHeight() {
+        int navigationBarHeight = 0;
+        int resourceId = getResources().getIdentifier("navigation_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            navigationBarHeight = getResources().getDimensionPixelSize(resourceId);
+        }
+        return navigationBarHeight;
+    }
 
-    };
+    /**
+     * @return 状态栏的高度
+     */
+    public int getStatusBarHeight() {
+        int statusBarHeight = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            statusBarHeight = getResources().getDimensionPixelSize(resourceId);
+        }
+        return statusBarHeight;
+    }
+
     private void openForwardService() {
         Intent intent = new Intent(this, MyService.class);
         startService(intent);
