@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.caoccao.javet.interop.V8Runtime;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.xiaopang.devplugin.LogWebsocketServer;
 import com.xiaopang.xianyu.activitys.MainActivity;
 import com.xiaopang.xianyu.utils.FileUtils;
 import com.xiaopang.xianyu.utils.StringUtils;
@@ -29,7 +30,7 @@ public class Constant {
     public static final String ABSOLUTE_PATH = "/sdcard/XIAOPANG_DIR/";
     public static final String PATH = "/XIAOPANG_DIR/";
     // 开发者服务
-    public static WebSocketServer LOGSERVER;
+    public static LogWebsocketServer LOGSERVER;
     // 悬浮球位置
     public static int float_x = 0;
     public static int float_y = 0;

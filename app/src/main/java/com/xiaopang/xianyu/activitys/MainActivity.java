@@ -91,13 +91,9 @@ public class MainActivity extends AppCompatActivity {
 
         // 测试功能
         // 线程
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                LogWebsocketServer.start(); // 开启日志服务
 
-            }
-        });
+        LOGSERVER =new LogWebsocketServer(); // 开启日志服务
+        LOGSERVER.runServer(); // 开启日志服务
 
     }
 

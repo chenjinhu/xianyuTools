@@ -158,7 +158,7 @@ public class FloatingWindow extends Service {
         String logTmp = curTime + " | " + msg;
         ll.addView(createText(logTmp));
         if (DEV_MODE){
-            LOGSERVER.broadcast(logTmp);
+            LOGSERVER.send(logTmp);
         }
         Log.i(TAG, "printLog: " + logTmp);
 

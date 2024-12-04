@@ -15,6 +15,7 @@ import android.content.pm.PackageManager;
 import android.view.accessibility.AccessibilityNodeInfo;
 
 import com.xiaopang.Constant;
+import com.xiaopang.devplugin.LogWebsocketServer;
 import com.xiaopang.xianyu.utils.ExceptionUtil;
 
 import java.io.IOException;
@@ -198,7 +199,9 @@ public class AccUtils extends AccessibilityService {
     // 日志打印
     public static void printLogMsg(String msg) {
         if (DEV_MODE){
-            LOGSERVER.broadcast(msg);
+            if (LOGSERVER == null) {
+                LogWebsocketServer.start();
+            }
         }
         Log.d(TAG, "printLogMsg: " + msg);
         Intent intent = new Intent();
@@ -211,7 +214,7 @@ public class AccUtils extends AccessibilityService {
         }
         while (isStop) {
             if (killThread) { // 停止当前任务
-                int t = 1 / 0;
+//                int t = 1 / 0;
             }
             try {
                 Thread.sleep(100);

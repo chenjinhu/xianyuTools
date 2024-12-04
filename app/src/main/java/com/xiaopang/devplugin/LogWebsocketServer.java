@@ -16,11 +16,20 @@ public class LogWebsocketServer {
     private static final int PORT = 8887;  // 默认端口
     private static WebSocketServer server;
     private static boolean isRunning = false;
+    private static LogWebsocketServer instance;
+    public LogWebsocketServer() {
+    }
 
+    public static LogWebsocketServer getInstance() {
+        if (instance == null) {
+            instance = new LogWebsocketServer();
+        }
+        return instance;
+    }
     public static boolean start() {
         if (isRunning) {
             Log.d(TAG, "WebSocket server is already running");
-            return true;
+            return false;
         }
 
         try {
@@ -67,7 +76,7 @@ public class LogWebsocketServer {
             // 启动服务器
             server.start();
 
-            LOGSERVER = server;
+
             return true;
 
         } catch (Exception e) {
@@ -108,7 +117,19 @@ public class LogWebsocketServer {
         }
     }
 
-    public static boolean isRunning() {
-        return isRunning;
+
+    public static void send(String message) {
+        broadcast(message);
+    }
+    public static void runServer() {
+        if (isRunning) {
+            return;
+        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                start();
+            }
+        }).start();
     }
 }
