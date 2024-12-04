@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">闲鱼助手</string>
-    <string name="accessibility_service_description">闲鱼养号插件</string>
+    <string name="app_name">XpAuto</string>
+    <string name="accessibility_service_description">基于Javascrip的自动化测试工具</string>
     <string name="title_home">脚本</string>
     <string name="title_dashboard">权限</string>
     <string name="title_notifications">关于</string>

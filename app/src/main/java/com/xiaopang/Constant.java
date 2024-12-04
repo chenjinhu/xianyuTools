@@ -24,8 +24,12 @@ public class Constant {
 
     public static String XIAOPANG_INFO = "小胖";
     public static String XIAOPANG_INFO_HOME = "小胖 XIAOPANG_INFO_HOME";
+    public static final String ABSOLUTE_PATH = "/sdcard/XIAOPANG_DIR/";
     public static final String PATH = "/XIAOPANG_DIR/";
 
+    // 悬浮球位置
+    public static int float_x = 0;
+    public static int float_y = 0;
 
     public static String tag = "xiaopang";
     // 停顿时长

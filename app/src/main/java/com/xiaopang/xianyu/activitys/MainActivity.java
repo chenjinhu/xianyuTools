@@ -95,8 +95,10 @@ public class MainActivity extends AppCompatActivity {
         boolean permission = WindowPermission.checkPermission(this);
         if (permission) {
             printLogMsg("onCreate: permission true => " + permission, 0);
-            // 打开悬浮窗
+            // 打开日志悬浮窗
             startService(new Intent(context, FloatingWindow.class));
+            // 打开控制悬浮窗
+            startService(new Intent(context, FloatingButton.class));
         }
     }
 
