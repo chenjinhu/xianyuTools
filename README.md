@@ -57,8 +57,88 @@ main();
 ```
 ####  滑动
 
-### 选择器
+### 选择器 && 节点
 
+#### text 属性选择
+##### 全文本匹配
+```javascript
+function main() {
+    //获取选择器对象
+    var selector = text("设置");
+    click(selector);
+}
+
+main();
+```
+##### 正则匹配
+```javascript
+function main() {
+    //获取选择器对象
+    var selector = textMatch(".*设置.*");
+    var result = click(selector);
+    if (result) {
+        toast("点击成功");
+    } else {
+        toast("点击失败");
+    }
+}
+
+main();
+```
+
+#### 节点信息类
+
+##### 说明
+节点对象NodeInfo，可以通过获取getNodeInfo方法获取到节点信息的数组,节点包含的信息如下
+- id: 字符串，资源的ID
+- clz: 字符串，视图类名，例如 android.widget.TextView
+- pkg: 字符串，包名，例如com.xx
+- desc: 字符串，内容描述
+- text: 字符串，文本
+- checkable: 布尔型，是否可选中
+- checked: 布尔型，是否选中
+- clickable: 布尔型，是否可点击
+- enabled: 布尔型，是否启用
+- focusable: 布尔型，是否可获取焦点
+- focused: 布尔型，是否聚焦
+- longClickable: 布尔型，是否可长点击
+- scrollable: 布尔型，是否滚动
+- selected: 布尔型，是否被选择
+- childCount: 整型，子节点的个数
+- index: 整型 节点的索引
+- depth: 整型 节点的层级深度
+- drawingOrder: 整型 节点的绘制顺序
+- bounds: Rect型，空间对象
+- - top: 整型，顶部位置
+- - bottom: 整型，底部位置
+- - left: 整型，左边位置
+- - right: 整型，右边位置
+- visibleBounds: Rect型，可视空间对象
+- - top: 整型，顶部位置
+- - bottom: 整型，底部位置
+- - left: 整型，左边位置
+- - right: 整型，右边位置
+
+##### 选择器获取一个节点 getOneNodeInfo
+- 通过选择器 获取第一个节点信息
+- @param timeout 等待时间，单位是毫秒, 如果是0，代表不等待
+- @return NodeInfo 对象 或者null
+```javascript
+function main() {
+    //获取选择器对象
+    //选择 节点 clz=android.widget.CheckBox所有节点，
+    var node = clz("android.widget.CheckBox").getOneNodeInfo(10000);
+
+    if (node) {
+        var x = node.click();
+        logd(x);
+    } else {
+        toast("无节点");
+    }
+}
+
+main(); 
+```
 ---
 参考项目
 - https://github.com/1754048656/FATJS (基本框架 + 大部分基础功能)

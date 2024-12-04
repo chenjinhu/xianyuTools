@@ -43,9 +43,9 @@ public interface IUiSelector {
     public UiSelector multiLine(boolean b);
     public UiObject untilFindOne();
     public UiObject untilFindOne(int time);
-    public UiObject findOne();
-    public UiObject findOne(AccessibilityNodeInfo accNodeInfo);
-    public UiObject findOne(int i);
+    public UiObject getOneNodeInfo();
+    public UiObject getOneNodeInfo(AccessibilityNodeInfo accNodeInfo);
+    public UiObject getOneNodeInfo(int i);
     public UiCollection find();
     public boolean exists();
     public void waitFor();

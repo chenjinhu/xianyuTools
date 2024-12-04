@@ -748,7 +748,7 @@ public class UiSelector implements IUiSelector{
      * 根据当前的选择器所确定的筛选条件，对屏幕上的控件进行搜索，如果找到符合条件的控件则返回该控件；否则返回null。
      * @return
      */
-    public UiObject findOne() {
+    public UiObject getOneNodeInfo() {
         //printLogMsg("Attributes " + this.containsAttributes);
         Map<String, Object> attributes = this.containsAttributes;
         if (attributes == null || attributes.isEmpty()) {
@@ -774,7 +774,7 @@ public class UiSelector implements IUiSelector{
      * @param accNodeInfo
      * @return
      */
-    public UiObject findOne(AccessibilityNodeInfo accNodeInfo) {
+    public UiObject getOneNodeInfo(AccessibilityNodeInfo accNodeInfo) {
         //printLogMsg("Attributes " + this.containsAttributes);
         Map<String, Object> attributes = this.containsAttributes;
         if (attributes == null || attributes.isEmpty()) {
@@ -801,7 +801,7 @@ public class UiSelector implements IUiSelector{
      * @param i
      * @return
      */
-    public UiObject findOne(int i) {
+    public UiObject getOneNodeInfo(int i) {
         //printLogMsg("Attributes " + this.containsAttributes);
         Map<String, Object> attributes = this.containsAttributes;
         if (attributes == null || attributes.isEmpty()) {

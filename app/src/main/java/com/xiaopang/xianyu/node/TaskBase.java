@@ -128,11 +128,15 @@ public class TaskBase extends UiSelector implements ITaskBase{
      * @return {boolean|布尔型}
      */
     public static boolean click(AccessibilityNodeInfo nodeInfo){
+        //
         return clickParentCanClick(nodeInfo);
     }
 
-    public static boolean _clickNode(AccessibilityNodeInfo nodeInfo) {
-        return click(nodeInfo);
+    public static boolean _clickNode(Object obj) {
+        if (obj instanceof AccessibilityNodeInfo){
+            return click((AccessibilityNodeInfo) obj);
+        }
+        return false;
     }
 
 
