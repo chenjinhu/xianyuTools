@@ -265,11 +265,8 @@ public class TaskBase extends UiSelector implements ITaskBase{
             v8Runtime.getGlobalObject().set("http", HttpUtils.class);
             // 工具类
             v8Runtime.getGlobalObject().set("utils", Utils.class);
-//            v8Runtime.getGlobalObject().set("websocket", WebSocketUtils.class);
-//            v8Runtime.getGlobalObject().set("UiObject", UiObject.class);
-//            v8Runtime.getGlobalObject().set("app", App.class);
-//            v8Runtime.getGlobalObject().set("Intent", Intent.class);
-//            v8Runtime.getGlobalObject().set("ntpService", NtpService.class);
+            // 文件类
+            v8Runtime.getGlobalObject().set("file", FileUtils.class);
 
             v8Runtime.getGlobalObject().set("shell", ShellUtils.class);
             // 判断脚本是否包含 task 变量

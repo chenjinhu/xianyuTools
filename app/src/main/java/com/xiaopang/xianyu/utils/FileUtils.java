@@ -1,6 +1,7 @@
 package com.xiaopang.xianyu.utils;
 
 
+import static com.xiaopang.Constant.context;
 import static com.xiaopang.Constant.tag;
 import static com.xiaopang.xianyu.node.AccUtils.printLogMsg;
 
@@ -22,6 +23,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
@@ -31,7 +33,16 @@ public class FileUtils {
     private static final String TAG = tag;
 
     /**
-     * 读取文件，一行一行读并在行尾加上换行
+     * 文件或者文件夹是否存在
+     * @param filePath 路径
+     * @return 布尔型 true 代表成功，false代表失败
+     */
+    public static boolean exists(String filePath) {
+        return new File(filePath).exists();
+    }
+
+    /**
+     * 将文件读取为字符串
      * @param filePath 文件的路径
      * @return
      */
@@ -48,13 +59,59 @@ public class FileUtils {
     }
 
     /**
+     * 删除文件某一行或者根据包含条件删除
+     * @param filePath 文件路径
+     * @param line 行数，如果是-1 代表这个条件不生效
+     * @param contains 包含某个字符串就删除，如果为null代表这个条件不生效
+     * @return
+     */
+    public static boolean deleteLine(String filePath, int line, String contains) {
+        List<String> lines = readAllLines(filePath);
+        boolean allLines = line == -1;
+        String writeStr = "";
+        for (int i = 0; i < lines.size(); i++) {
+            if (!allLines && i == line){
+                // 跳过要删除的行
+                continue;
+            }else if (contains != null){
+                String lineStr = lines.get(i);
+                if (lineStr.contains(contains)){
+                    continue;
+                }
+
+            }
+            writeStr += lines.get(i) + "\n";
+
+        }
+
+        return deleteFile(filePath) && writeFile(filePath, writeStr);
+
+    }
+
+
+    /**
+     * 读取一行数据，如果行号不对，返回的是空
+     * @param filePath 路径
+     * @param line 行号
+     * @return 字符串 返回一行字符串
+     */
+    public static String readLine(String filePath, int line) {
+        List<String> lines = readAllLines(filePath);
+        if (line < 0 || line >= lines.size()){
+            return "";
+        }
+        return lines.get(line);
+
+    }
+
+    /**
      * 从文本中逐行读取
      * @param filePath
      * @return
      */
-    public static List<String> readLines(String filePath) {
-        List<String> lines = new ArrayList<>();
+    public static List<String> readAllLines (String filePath) {
 
+        List<String> lines = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -73,11 +130,14 @@ public class FileUtils {
      * @param content 要写入的内容
      * @return 写入成功返回true，否则返回false
      */
-    public static boolean writeFile(String fileName, String content) {
+    public static boolean writeFile(String content,String fileName) {
         // 使用try-with-resources来自动管理资源，自动关闭流
         try (BufferedWriter bufferedWriter = Files.newBufferedWriter(Paths.get(fileName),
                 StandardOpenOption.CREATE, StandardOpenOption.WRITE)) {
             bufferedWriter.write(content);
+            bufferedWriter.flush();
+            bufferedWriter.close();
+
             return true; // 成功写入
         } catch (IOException e) {
             printLogMsg("writeFile: IOException: " + e.getMessage());
@@ -105,6 +165,16 @@ public class FileUtils {
     }
 
     /**
+     * 写入一行到文件中,追加模式. 在文件尾增加 line + "\n"
+     * @param line 行数据
+     * @param filePath 文件或者文件路径
+     * @return  布尔型 true代表成功 false代表失败
+     */
+    public static boolean appendLine( String line,String filePath) {
+        return appendFile(filePath, line + "\n");
+    }
+
+    /**
      * 删除对应文件
      * @param filePath
      * @return
@@ -118,13 +188,47 @@ public class FileUtils {
     }
 
     /**
+     * 删除所有文件或者文件夹
+     * @param path 文件或者文件路径
+     * @return 影响的文件数量
+     */
+    public static int deleteAllFile(String path){
+        File file = new File(path);
+        if (!file.exists()){
+            return 0;
+        }
+        if (file.isFile()){
+            // 是文件
+            return deleteFile(path) ? 1 : 0;
+        }else {
+            // 是文件夹
+            int count = 0;
+            for (File f : file.listFiles()) {
+                count += deleteAllFile(f.getPath());
+            }
+            return count;
+        }
+
+    }
+
+    /**
      * 创建文件夹
      * @param fileDirectory
      */
-    public static void createDirectory(String fileDirectory) {
+    public static void mkdirs(String fileDirectory) {
         File file = new File(fileDirectory);
         if (!file.exists()) {
             file.mkdirs();
+        }
+    }
+
+    public static boolean copy(String src, String dst){
+        try {
+            Files.copy(Paths.get(src), Paths.get(dst));
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 
@@ -156,7 +260,7 @@ public class FileUtils {
      * @param folderPath
      * @return
      */
-    public static List<String> pathFileList(String folderPath) {
+    public static List<String> listDir(String folderPath) {
         List<String> list = new ArrayList<>();
         File folder = new File(folderPath);
         if (folder.exists() && folder.isDirectory()) {
@@ -295,4 +399,55 @@ public class FileUtils {
         }
         return false;
     }
+
+    /**
+     * 创建文件或文件夹  文件本身已存在返回false
+     * @param path 文件路径
+     * @return 布尔型 true 代表创建成功
+     */
+    public static boolean create(String path){
+        File file = new File(path);
+        if (file.exists()){
+            // 文件已存在
+            return false;
+        }
+        // 创建当前路径是文件夹还是文件
+        Path pPath = Paths.get(path);
+        if (path.endsWith(File.separator)){
+            // 是文件夹
+            file.mkdirs();
+        }else{
+            // 是文件
+            try {
+                return file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * 从APK的assets文件夹中读取数据为字符串
+     * @param path assets文件夹中的文件路径，例如 data/a.txt
+     * @return 字符串
+     */
+    public static String readAssets(String path){
+        try {
+            InputStream inputStream = context.getAssets().open(path);
+            byte[] bArr = new byte[inputStream.available()];
+            inputStream.read(bArr);
+            inputStream.close();
+            String str = new String(bArr, "UTF-8");
+            return str;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+
 }
