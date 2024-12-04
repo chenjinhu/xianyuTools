@@ -197,6 +197,9 @@ public class AccUtils extends AccessibilityService {
 
     // 日志打印
     public static void printLogMsg(String msg) {
+        if (DEV_MODE){
+            LOGSERVER.broadcast(msg);
+        }
         Log.d(TAG, "printLogMsg: " + msg);
         Intent intent = new Intent();
         intent.setAction("com.msg");
@@ -204,7 +207,7 @@ public class AccUtils extends AccessibilityService {
         context.sendBroadcast(intent);
 
         if (killThread) { // 停止当前任务
-            int i = 1 / 0;
+//            int i = 1 / 0;
         }
         while (isStop) {
             if (killThread) { // 停止当前任务

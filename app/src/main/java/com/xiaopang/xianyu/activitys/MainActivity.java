@@ -32,6 +32,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.xiaopang.Constant;
 import static com.xiaopang.xianyu.node.AccUtils.*;
 
+import com.xiaopang.devplugin.LogWebsocketServer;
 import com.xiaopang.xianyu.R;
 import com.xiaopang.xianyu.activitys.FloatingButton;
 import com.xiaopang.xianyu.activitys.FloatingWindow;
@@ -87,6 +88,16 @@ public class MainActivity extends AppCompatActivity {
 
 //        DevicesOAID(); // OAID/AAID
         reviewConfig(); // 回显 config 数据
+
+        // 测试功能
+        // 线程
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                LogWebsocketServer.start(); // 开启日志服务
+
+            }
+        });
 
     }
 

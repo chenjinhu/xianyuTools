@@ -13,6 +13,8 @@ import com.xiaopang.xianyu.activitys.MainActivity;
 import com.xiaopang.xianyu.utils.FileUtils;
 import com.xiaopang.xianyu.utils.StringUtils;
 
+import org.java_websocket.server.WebSocketServer;
+
 
 public class Constant {
     public static boolean CRON_TASK = false; // 定时任务是否开启
@@ -26,7 +28,8 @@ public class Constant {
     public static String XIAOPANG_INFO_HOME = "小胖 XIAOPANG_INFO_HOME";
     public static final String ABSOLUTE_PATH = "/sdcard/XIAOPANG_DIR/";
     public static final String PATH = "/XIAOPANG_DIR/";
-
+    // 开发者服务
+    public static WebSocketServer LOGSERVER;
     // 悬浮球位置
     public static int float_x = 0;
     public static int float_y = 0;
