@@ -9,7 +9,15 @@ const getHashMapBuffer = () => {
 }
 // -------------------- 全局快捷事件-------------------//
 //  ---- 选择器 ----//
+//  -------- 文本 --------//
 const text = (str) => task._text(str);
+const textMatch = (str) => task._textMatch(str);
+//  --------  id --------//
+const id = (id) => task._id(id);
+const idMatch = (id) => task._idMatch(id);
+
+
+
 
 //  ---- 点击事件 ----//
 const click = (node) => task._clickNode(node);

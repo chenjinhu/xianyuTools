@@ -30,7 +30,7 @@ public class Utils {
      * @return 布尔型 true 代表成功，false 代表失败
      */
     public static boolean openAppByName (String appName) {
-        return new UiSelector().textMatches(appName).getOneNodeInfo().click();
+        return new UiSelector().textMatch(appName).getOneNodeInfo().click();
     }
 
 }

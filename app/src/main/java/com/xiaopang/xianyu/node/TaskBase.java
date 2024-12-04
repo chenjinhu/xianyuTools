@@ -24,6 +24,7 @@ import com.caoccao.javet.interop.V8Runtime;
 import com.caoccao.javet.interop.converters.JavetProxyConverter;
 import com.xiaopang.xianyu.okhttp3.HttpUtils;
 import com.xiaopang.xianyu.utils.FileUtils;
+import com.xiaopang.xianyu.utils.ShellUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,10 +41,22 @@ public class TaskBase extends UiSelector implements ITaskBase{
     private static String base;
     // ----------------  全局快捷事件
     // ---- 选择器
-
+    // ------- 文本选择器
     public UiSelector _text(String str){
-        printLogMsg("寻找文本: " + str, 0);
         return text(str);
+    }
+
+    public UiSelector _textMatch(String regex){
+        return textMatch(regex);
+    }
+    // ------- id选择器
+    public UiSelector _id(String id){
+        return id(id);
+    }
+
+    public UiSelector _idMatch(String str){
+        return idMatch(str);
+
     }
 
     // ---- 点击
@@ -128,13 +141,17 @@ public class TaskBase extends UiSelector implements ITaskBase{
      * @return {boolean|布尔型}
      */
     public static boolean click(AccessibilityNodeInfo nodeInfo){
-        //
         return clickParentCanClick(nodeInfo);
     }
 
-    public static boolean _clickNode(Object obj) {
-        if (obj instanceof AccessibilityNodeInfo){
-            return click((AccessibilityNodeInfo) obj);
+    public static boolean _clickNode(AccessibilityNodeInfo nodeInfo) {
+        return click(nodeInfo);
+    }
+
+    public static boolean _clickNode(UiSelector selector) {
+        UiObject obj = selector.getOneNodeInfo();
+        if (obj!= null) {
+            return obj.click();
         }
         return false;
     }
@@ -254,6 +271,7 @@ public class TaskBase extends UiSelector implements ITaskBase{
 //            v8Runtime.getGlobalObject().set("Intent", Intent.class);
 //            v8Runtime.getGlobalObject().set("ntpService", NtpService.class);
 
+            v8Runtime.getGlobalObject().set("shell", ShellUtils.class);
             // 判断脚本是否包含 task 变量
             if (!script.contains("let task = new engines()")) {
                 script = base + "\n" + script;

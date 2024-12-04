@@ -158,12 +158,12 @@ public class UiSelector implements IUiSelector{
      * @param reg
      * @return
      */
-    public UiSelector textMatches(String reg) {
+    public UiSelector textMatch(String reg) {
         if (StringUtils.isEmpty(reg)) {
             return null;
         }
 
-        containsAttributes.put("textMatches", reg);
+        containsAttributes.put("textMatch", reg);
         return this;
     }
 
@@ -234,12 +234,12 @@ public class UiSelector implements IUiSelector{
      * @param reg
      * @return
      */
-    public UiSelector descMatches(String reg) {
+    public UiSelector descMatch(String reg) {
         if (StringUtils.isEmpty(reg)) {
             return null;
         }
 
-        containsAttributes.put("descMatches", reg);
+        containsAttributes.put("descMatch", reg);
         return this;
     }
 
@@ -310,12 +310,12 @@ public class UiSelector implements IUiSelector{
      * @param reg
      * @return
      */
-    public UiSelector idMatches(String reg) {
+    public UiSelector idMatch(String reg) {
         if (StringUtils.isEmpty(reg)) {
             return null;
         }
 
-        containsAttributes.put("idMatches", reg);
+        containsAttributes.put("idMatch", reg);
         return this;
     }
 
@@ -390,12 +390,12 @@ public class UiSelector implements IUiSelector{
      * @param reg
      * @return
      */
-    public UiSelector classNameMatches(String reg) {
+    public UiSelector classNameMatch(String reg) {
         if (StringUtils.isEmpty(reg)) {
             return null;
         }
 
-        containsAttributes.put("classNameMatches", reg);
+        containsAttributes.put("classNameMatch", reg);
         return this;
     }
 
@@ -466,12 +466,12 @@ public class UiSelector implements IUiSelector{
      * @param reg
      * @return
      */
-    public UiSelector packageNameMatches(String reg) {
+    public UiSelector packageNameMatch(String reg) {
         if (StringUtils.isEmpty(reg)) {
             return null;
         }
 
-        containsAttributes.put("packageNameMatches", reg);
+        containsAttributes.put("packageNameMatch", reg);
         return this;
     }
 
@@ -1042,7 +1042,7 @@ public class UiSelector implements IUiSelector{
                 return String.valueOf(node.getText()).startsWith(String.valueOf(value));
             case "textEndsWith":
                 return String.valueOf(node.getText()).endsWith(String.valueOf(value));
-            case "textMatches":
+            case "textMatch":
                 String text = String.valueOf(node.getText());
                 text = text.equals("null") ? "" : text;
                 return text.matches(String.valueOf(value));
@@ -1053,7 +1053,7 @@ public class UiSelector implements IUiSelector{
                 return String.valueOf(node.getContentDescription()).startsWith(String.valueOf(value));
             case "descEndsWith":
                 return String.valueOf(node.getContentDescription()).endsWith(String.valueOf(value));
-            case "descMatches":
+            case "descMatch":
                 String desc = String.valueOf(node.getContentDescription());
                 desc = desc.equals("null") ? "" : desc;
                 return desc.matches(String.valueOf(value));
@@ -1064,7 +1064,7 @@ public class UiSelector implements IUiSelector{
                 return String.valueOf(node.getViewIdResourceName()).startsWith(String.valueOf(value));
             case "idEndsWith":
                 return String.valueOf(node.getViewIdResourceName()).endsWith(String.valueOf(value));
-            case "idMatches":
+            case "idMatch":
                 return String.valueOf(node.getViewIdResourceName()).matches(String.valueOf(value));
             case "className":
             case "classNameContains":
@@ -1073,7 +1073,7 @@ public class UiSelector implements IUiSelector{
                 return String.valueOf(node.getClassName()).startsWith(String.valueOf(value));
             case "classNameEndsWith":
                 return String.valueOf(node.getClassName()).endsWith(String.valueOf(value));
-            case "classNameMatches":
+            case "classNameMatch":
                 return String.valueOf(node.getClassName()).matches(String.valueOf(value));
             case "packageName":
             case "packageNameContains":
