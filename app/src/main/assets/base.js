@@ -31,10 +31,14 @@ const showLog = () => task._showLog();
 const hideLog = () => task._hideLog();
 const fullScreenLog = () => task._fullScreenLog();
 const clearLog = () => task._clearLog();
-// -------------------- 基础类 -------------------//
-const home = () => task._home();
+// -------------------- 按键模拟 -------------------// 参考autojs
 const back = () => task._back();
-
+const home = () => task._home();
+const power = () => task._power();
+const menu = () => task._menu();
+const openNotification = () => task._openNotification();
+const openQuickSettings = () => task._openQuickSettings();
+const recentApps       = () => task._recentApps();
 // -------------------- 时间类 -------------------//
 const sleep = (ms) => task._sleep(ms);
 
