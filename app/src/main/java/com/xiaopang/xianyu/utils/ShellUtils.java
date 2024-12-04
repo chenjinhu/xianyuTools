@@ -1,6 +1,7 @@
 package com.xiaopang.xianyu.utils;
 
 import static com.xiaopang.Constant.tag;
+import static com.xiaopang.xianyu.node.AccUtils.printLogMsg;
 import static com.xiaopang.xianyu.utils.AbstractShell.COMMAND_EXIT;
 import static com.xiaopang.xianyu.utils.AbstractShell.COMMAND_LINE_END;
 import static com.xiaopang.xianyu.utils.AbstractShell.COMMAND_SH;
@@ -63,6 +64,9 @@ public class ShellUtils {
         return execCommand(command,false);
     }
 
+    public static String sudo(String command){
+        return execCommand(command,true);
+    }
     private static String readAll(InputStream inputStream) throws IOException {
         String line;
         StringBuilder builder = new StringBuilder();
@@ -73,8 +77,10 @@ public class ShellUtils {
         return builder.toString();
     }
     public static boolean installApp(String path){
-        // return shell("pm install -r " + path);
+        String str = execCommand("pm install -r " + path);
+        printLogMsg(str);
         return false;
+
     }
 
     public ShellUtils readAll() {
