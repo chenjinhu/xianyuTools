@@ -1,0 +1,5 @@
+//openQuickSettings();
+recentApps();
+recentApps();
+
+menu();
