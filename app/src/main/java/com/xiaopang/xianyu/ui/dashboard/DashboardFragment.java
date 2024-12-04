@@ -91,7 +91,7 @@ public class DashboardFragment extends Fragment {
             String directoryPath = Environment.getExternalStorageDirectory().getAbsoluteFile() + PATH;
             String filePath = directoryPath + "version.txt";
             printLogMsg(directoryPath, 0);
-            FileUtils.createDirectory(directoryPath);
+            FileUtils.mkdirs(directoryPath);
             permission = FileUtils.writeToTxt(filePath, "test");
         }catch (Exception e) {}
 
@@ -130,7 +130,7 @@ public class DashboardFragment extends Fragment {
                 }
                 _storage = true;
                 switch_storage.setChecked(true);
-                FileUtils.createDirectory(Environment.getExternalStorageDirectory() + PATH);
+                FileUtils.mkdirs(Environment.getExternalStorageDirectory() + PATH);
                 FileUtils.writeToTxt(
                         Environment.getExternalStorageDirectory() + PATH + "version.txt",
                         "test");
