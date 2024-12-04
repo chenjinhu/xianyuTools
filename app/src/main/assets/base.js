@@ -7,6 +7,15 @@ const getHashMapBuffer = () => {
     }
     return null;
 }
+// -------------------- 全局快捷事件-------------------//
+//  ---- 选择器 ----//
+const text = (str) => task._text(str);
+
+//  ---- 点击事件 ----//
+const click = (node) => task._clickNode(node);
+const clickPoint = (x, y) => task._clickPoint(x, y);
+//  ---- 滑动事件 ----//
+const swipe = (x1, y1, x2, y2, duration) => task._swipe(x1, y1, x2, y2, duration);
 
 // -------------------- 日志输出类 -------------------//
 const print = (msg) => task._print(msg + '');
