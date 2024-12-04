@@ -1,8 +1,11 @@
-# 闲鱼助手
+# 小胖自动化助手
 
-> 目前啥功能也没用, 各位看观加个star
+> 这是一款基于无障碍开发的自动化工具, 支持Javascript语法编写脚本.
 > 
+
+
 > 感谢FATJS项目提供的思路, 本项目基础架构全抄FatJS.
+> 
 > API接口参考easyclick 尽可能和easyclick保持一致.
 
 
@@ -58,6 +61,6 @@ main();
 
 ---
 参考项目
-- https://github.com/zhyaoqi/platformautoplug
-- https://github.com/1754048656/FATJS
-- https://ieasyclick.com/
+- https://github.com/1754048656/FATJS (基本框架)
+- https://ieasyclick.com/ (参考API设计)
+- https://github.com/caoccao/Javet (V8引擎)
