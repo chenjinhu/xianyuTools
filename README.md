@@ -144,3 +144,4 @@ main();
 - https://github.com/1754048656/FATJS (基本框架 + 大部分基础功能)
 - https://ieasyclick.com/ (参考API设计)
 - https://github.com/caoccao/Javet (V8引擎)
+- https://github.com/kkevsekk1/AutoX (功能实现)
