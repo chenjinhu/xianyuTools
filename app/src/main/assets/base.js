@@ -15,6 +15,13 @@ const textMatch = (str) => task._textMatch(str);
 //  --------  id --------//
 const id = (id) => task._id(id);
 const idMatch = (id) => task._idMatch(id);
+//  -------- clz 类 --------//
+const clz = (clz) => task._clz(clz);
+const clzMatch = (clz) => task._clzMatch(clz);
+//  -------- desc 描述 --------//
+const desc = (desc) => task._desc(desc);
+const descMatch = (desc) => task._descMatch(desc);
+
 
 
 

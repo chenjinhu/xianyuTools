@@ -294,6 +294,24 @@ public class AccUtils extends AccessibilityService {
         return false;
     }
 
+    public static Boolean openQuickSettings() {
+        try {
+            AccessibilityHelper.performGlobalAction(AccessibilityService.GLOBAL_ACTION_QUICK_SETTINGS);
+            return true;
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public static Boolean recentApps() {
+        try {
+            AccessibilityHelper.performGlobalAction(AccessibilityService.GLOBAL_ACTION_RECENTS);
+            return true;
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
     /**
      * 获取坐标
      * @param nodeInfo

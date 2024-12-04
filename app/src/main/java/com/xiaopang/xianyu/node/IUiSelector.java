@@ -18,11 +18,11 @@ public interface IUiSelector {
     public UiSelector idStartsWith(String prefix);
     public UiSelector idEndsWith(String suffix);
     public UiSelector idMatch(String reg);
-    public UiSelector className(String str);
+    public UiSelector clz(String str);
     public UiSelector classNameContains(String str);
     public UiSelector classNameStartsWith(String prefix);
     public UiSelector classNameEndsWith(String suffix);
-    public UiSelector classNameMatch(String reg);
+    public UiSelector clzMatch(String reg);
     public UiSelector packageName(String str);
     public UiSelector packageNameContains(String str);
     public UiSelector packageNameStartsWith(String prefix);

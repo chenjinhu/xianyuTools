@@ -329,7 +329,7 @@ public class UiSelector implements IUiSelector{
      * @param str
      * @return
      */
-    public UiSelector className(String str) {
+    public UiSelector clz(String str) {
         if (StringUtils.isEmpty(str)) {
             return null;
         }
@@ -390,7 +390,7 @@ public class UiSelector implements IUiSelector{
      * @param reg
      * @return
      */
-    public UiSelector classNameMatch(String reg) {
+    public UiSelector clzMatch(String reg) {
         if (StringUtils.isEmpty(reg)) {
             return null;
         }

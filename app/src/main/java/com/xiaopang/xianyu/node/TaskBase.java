@@ -6,7 +6,9 @@ import static com.xiaopang.xianyu.node.AccUtils.back;
 import static com.xiaopang.xianyu.node.AccUtils.home;
 import static com.xiaopang.xianyu.node.AccUtils.loadScriptFromAssets;
 import static com.xiaopang.xianyu.node.AccUtils.moveFloatWindow;
+import static com.xiaopang.xianyu.node.AccUtils.openQuickSettings;
 import static com.xiaopang.xianyu.node.AccUtils.printLogMsg;
+import static com.xiaopang.xianyu.node.AccUtils.recentApps;
 import static com.xiaopang.xianyu.node.AccUtils.timeSleep;
 
 import android.accessibilityservice.AccessibilityService;
@@ -58,6 +60,22 @@ public class TaskBase extends UiSelector implements ITaskBase{
         return idMatch(str);
 
     }
+    // ------- clz类名选择器
+    public UiSelector _clz(String str){
+        return clz(str);
+    }
+
+    public UiSelector _clzMatch(String regex){
+        return clzMatch(regex);
+    }
+    // ------- desc描述选择器
+    public UiSelector _desc(String str){
+        return desc(str);
+    }
+    public UiSelector _descMatch(String regex){
+        return descMatch(regex);
+    }
+
 
     // ---- 点击
     /**
@@ -228,12 +246,37 @@ public class TaskBase extends UiSelector implements ITaskBase{
     }
 
     // ----------------    基础按键
+    public void keyevent(int code){
+        ShellUtils.sudo("input keyevent " + code);
+
+
+    }
+
+
     public boolean _back() {
         return back();
     }
     public boolean _home() {
         return home();
     }
+    public Boolean _menu(){
+        return recentApps();
+    }
+    public void _power(){
+        keyevent(26);
+    }
+    public void _openNotification(){
+        keyevent(83);
+    }
+
+    public Boolean _openQuickSettings(){
+        return openQuickSettings();
+    }
+
+    public Boolean _recentApps(){
+        return recentApps();
+    }
+
     // ----------------    时间
     public void _sleep(int time) {
         timeSleep(time);
